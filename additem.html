@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- John Williams
+	Project: Web App Part 2
+	November 03, 2011
+	Week 2
+--> 
+
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <meta name="description" content="Welcome to the Online Beer Store where you can buy beer."/>
+	<meta name="keywords" content="beer, canned beer, bottled beer, tap beer, kegs"/>
+	<meta name="viewport" content="user-scalable=no, width=device-width" />
+	<meta name="viewport" content="target-densitydpi=device-dpi" />
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320" />	
+	<meta name="robots" content="index,follow" />
+    <title>Online Beer Store</title>
+    <link rel="stylesheet" href="css/styles.css" type="text/css" />    
+</head>
+	<body>
+		<h1 class="logo">Online Beer Store</h1>
+		<form action="#" method="post" id="beerForm">	
+			<fieldset>
+				<legend>Verify Your Info</legend>
+				<ul>
+					<li><label for="fname">Name:&nbsp;</label><input type="text" name="fname" id="fname"/></li>
+					<li><label for="email">Email:&nbsp;</label><input type="email" name="email" id="email" placeholder="example@email.com"/></li>
+					<li><label for="url">Home Page:&nbsp;</label><input type="url" name="url" id="url" placeholder="http://mysite.com"/></li>
+				</ul>
+			</fieldset>
+			<fieldset>
+				<legend>Gender</legend>
+				<ul>
+					<li><input type="radio" checked value="Male" id="male" name="sex" /><label style="display:inline;" for="male">Male</label></li>
+					<li><input type="radio" value="Female" id="female" name="sex" /><label style="display:inline;" for="female">Female</label></li>
+				</ul>
+			</fieldset>				
+			<fieldset>
+				<legend>Verify Age</legend>
+				<label for="borndate">Date of birth:</label>
+				<input type="date" min="1904-10-27" max="1990-11-28" id="borndate" name="borndate" required aria-required="true" placeholder="1991-11-28">
+			</fieldset>					
+			<fieldset>
+				<legend>Place Order</legend>
+				<ul>
+					<li id="select"><label for="group">*Choose Your Can Of Beer:</label></li>
+					<li><label for="quantity">How many would you like to buy?</label><br />
+					<input id="quantity" type="range" min="1" max="12" name="quantity" type="range"></li>
+					<li><label for="comments">Additional Info:</label><br /><textarea id="comments"></textarea></li>
+				</ul>
+			</fieldset>	
+			<fieldset>
+				<legend>Terms of Service</legend>
+				<input type="checkbox" id="terms" name="terms">&nbsp;<label style="display:inline;" for="terms">Agree to Terms of Service</label><br />
+				<input class="button" type="submit" value="Save Order" id="submit" />
+			</fieldset>
+			<footer>
+				<nav>
+				<br />
+				<a class="footer_nav" href="#" id="clear">Clear stored data</a> | <a class="footer_nav" href="#" id="displayLink">Display data</a>
+				</nav>
+			</footer>
+		</form>
+			<a class="button2" href="additem.html" id="addNew" style="display:none;">Add New Item</a>
+		<script src="js/main.js" type="text/javascript"></script>
+	</body>
+</html>
