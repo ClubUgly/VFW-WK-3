@@ -51,6 +51,11 @@ legend {
 	font-weight: bold;
 }
 
+#errors {
+	font-weight: bold;
+	color: #ff0000;
+}
+
 .button {
 	background: #cccccc;
 	color: #555555;

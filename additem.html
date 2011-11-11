@@ -23,7 +23,9 @@
 		<form action="#" method="post" id="beerForm">	
 			<fieldset>
 				<legend>Verify Your Info</legend>
-				<ul>
+				<span>* Fields are required.</span>
+				<ul id="errors"></ul>
+				<ul id="questions">
 					<li><label for="fname">Name:&nbsp;</label><input type="text" name="fname" id="fname"/></li>
 					<li><label for="email">Email:&nbsp;</label><input type="email" name="email" id="email" placeholder="example@email.com"/></li>
 					<li><label for="url">Home Page:&nbsp;</label><input type="url" name="url" id="url" placeholder="http://mysite.com"/></li>

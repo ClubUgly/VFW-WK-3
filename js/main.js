@@ -176,6 +176,16 @@ window.addEventListener("DOMContentLoaded", function(){
 		if(item.terms[1] == "Yes"){
 			$('terms').setAttribute("checked", "checked");
 		}
+		
+		//remove the initial listener from the input save order button
+		save.removeEventListener("click", storeData);
+		//change submit button value to edit button
+		$('submit').value = "Edit Order";
+		var editSubmit = $('submit');
+		//save the key value established in this function as a property of the edit submit event.
+		//so we can use that value when we save the data we edited.
+		editSubmit.addEventListener("click", validate);
+		editSubmit.key = this.key;
 	}
 	
 	function clearLocal(){
@@ -189,10 +199,64 @@ window.addEventListener("DOMContentLoaded", function(){
 		}
 	}
 	
+	function validate(e){
+		//define elements we want to check
+		var getFname = $('fname');
+		var getEmail = $('email');
+		var getBorndate = $('borndate');
+		var getGroup =$('groups');
+		
+		//get error messages
+		var messageAry = [];
+
+		
+		//name validation
+		if(getFname.value === ""){
+			var fNameError = "Please enter your name.";
+			getFname.style.border = "1px solid red";
+			messageAry.push(fNameError);		
+		}
+		
+		//email validation
+		var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(!(re.exec(getEmail.value))){
+			var emailError = "Please enter a valid email address.";
+			getEmail.style.border = "1px solid red";
+			messageAry.push(emailError);
+		}
+		
+		//DOB validation
+		if(getBorndate.value === ""){
+			var borndateError = "Please enter your birthday.";
+			getBorndate.style.border = "1px solid red";
+			messageAry.push(borndateError);		
+		}		
+		
+		//group vailidation
+		if(getGroup.value=="--Choose your can of beer--"){
+			var groupError = "Please choose a beer.";
+			getGroup.style.border = "1px solid red";
+			messageAry.push(groupError);
+		}
+				
+		//if there were errors, display them on the screen.
+		if(messageAry.length >= 1){
+			for(var i=0, j=messageAry.length; i < j; i++){
+				var txt = document.createElement('li');
+				txt.innerHTML = messageAry[i];
+				errMsg.appendChild(txt);	
+			}
+			
+		}
+		e.preventDefault();
+		return false;
+	}
+	
 	//Variable defaults
 	var beerSelection = ["--Choose your can of beer--", "Bud Light", "Bud Select", "Sam Adams Cherry", "Sam Adams October Fest", "Corona", "Corona Light", "Milwaukee's Best"],
 		sexValue,
-		termsValue = "No"	
+		termsValue = "No",
+		errMsg = $('errors');	
 	;
 	makeCats();
 	
@@ -202,6 +266,6 @@ window.addEventListener("DOMContentLoaded", function(){
 	var clearLink = $('clear');
 	clearLink.addEventListener("click", clearLocal);
 	var save = $('submit');
-	save.addEventListener("click", storeData);
+	save.addEventListener("click", validate);
 
 });
