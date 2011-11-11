@@ -165,12 +165,12 @@ window.addEventListener("DOMContentLoaded", function(){
 		for(var i=0; i<radios.length; i++){
 			if(radios[i].value == "Male" && item.sex[1] == "Male"){
 				radios[i].setAttribute("checked", "checked");
-			}else if(radios[i].value == "Female" && itme.sex[1] == "Female"){
+			}else if(radios[i].value == "Female" && item.sex[1] == "Female"){
 				radios[i].setAttribute("checked", "checked");
 			}
 		}
 		$('borndate').value = item.borndate[1];
-		$('groups').value = item.groups[1];
+		$('groups').value = item.group[1];
 		$('quantity').value = item.quantity[1];
 		$('comments').value = item.comments[1];
 		if(item.terms[1] == "Yes"){
