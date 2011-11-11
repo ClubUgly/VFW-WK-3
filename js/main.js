@@ -131,7 +131,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		editLink.href = "#";
 		editLink.key = key;
 		var editText = "Edit Order";
-		//editLink.addEventListener("click", editItem);
+		editLink.addEventListener("click", editItem);
 		editLink.innerHTML = editText;
 		linksLi.appendChild(editLink);
 		
@@ -147,6 +147,35 @@ window.addEventListener("DOMContentLoaded", function(){
 		//deleteLink.addEventListener("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
+	}
+	
+	function editItem(){
+		//grab the data from our item from local storage.
+		var value = localStorage.getItem(this.key);
+		var item = JSON.parse(value);
+		
+		//show the forum
+		toggleControls("off");
+		
+		//populate the form fields with current localStorage values.
+		$('fname').value = item.fname[1];
+		$('email').value = item.email[1];
+		$('url').value = item.url[1];
+		var radios = document.forms[0].sex
+		for(var i=0; i<radios.length; i++){
+			if(radios[i].value == "Male" && item.sex[1] == "Male"){
+				radios[i].setAttribute("checked", "checked");
+			}else if(radios[i].value == "Female" && itme.sex[1] == "Female"){
+				radios[i].setAttribute("checked", "checked");
+			}
+		}
+		$('borndate').value = item.borndate[1];
+		$('groups').value = item.groups[1];
+		$('quantity').value = item.quantity[1];
+		$('comments').value = item.comments[1];
+		if(item.terms[1] == "Yes"){
+			$('terms').setAttribute("checked", "checked");
+		}
 	}
 	
 	function clearLocal(){
