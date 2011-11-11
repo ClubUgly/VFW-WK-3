@@ -200,6 +200,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		var ask = confirm("Are you sure you wish to delete this order?");
 		if(ask){
 			localStorage.removeItem(this.key);
+			alert("Order was deleted!!!");
 			window.location.reload();
 		}else{
 			alert("Order was NOT deleted.")
