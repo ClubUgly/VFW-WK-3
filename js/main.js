@@ -69,8 +69,16 @@ window.addEventListener("DOMContentLoaded", function(){
 		}
 	}
 	
-	function storeData(){
-		var id 			= Math.floor(Math.random()*100000001);
+	function storeData(key){
+		//if there is no key, this means this is a brand new item and we need a new key
+		if(!key){
+			var id 			= Math.floor(Math.random()*100000001);		
+		}else{
+			//set the id to the existing key were editing so that it will save over the data
+			//the key is the same key thats been passed along from the editSubmit even handle
+			//to the validate function, and then passed here into the storeData function.
+			id = key;
+		}
 		// collect all form field values and store in an object
 		// object properties contain array with the form label and input value
 		getSelectedRadio();
@@ -144,7 +152,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		deleteLink.href = "#";
 		deleteLink.key = key;
 		var deleteText = "Delete Order";
-		//deleteLink.addEventListener("click", deleteItem);
+		deleteLink.addEventListener("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
 	}
@@ -188,6 +196,16 @@ window.addEventListener("DOMContentLoaded", function(){
 		editSubmit.key = this.key;
 	}
 	
+	function deleteItem(){
+		var ask = confirm("Are you sure you wish to delete this order?");
+		if(ask){
+			localStorage.removeItem(this.key);
+			window.location.reload();
+		}else{
+			alert("Order was NOT deleted.")
+		}
+	}
+	
 	function clearLocal(){
 		if(localStorage.length === 0){
 			alert("There is no data to clear.")
@@ -205,6 +223,13 @@ window.addEventListener("DOMContentLoaded", function(){
 		var getEmail = $('email');
 		var getBorndate = $('borndate');
 		var getGroup =$('groups');
+		
+		//reset error messages
+		errMsg.innerHTML = "";
+		getFname.style.border = "1px solid black";
+		getEmail.style.border = "1px solid black";
+		getBorndate.style.border = "1px solid black";
+		getGroup.style.border = "1px solid black";
 		
 		//get error messages
 		var messageAry = [];
@@ -246,10 +271,13 @@ window.addEventListener("DOMContentLoaded", function(){
 				txt.innerHTML = messageAry[i];
 				errMsg.appendChild(txt);	
 			}
-			
+			e.preventDefault();
+			return false;
+		}else{
+			// if all is ok, save our data! send key value which came from the edit data function
+			// remember this key value was passed through
+			storeData(this.key);			
 		}
-		e.preventDefault();
-		return false;
 	}
 	
 	//Variable defaults
